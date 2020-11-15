@@ -1,43 +1,36 @@
-﻿using System;
+﻿using Microsoft.Management.Infrastructure;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Microsoft.Management.Infrastructure;
-using System.Net.NetworkInformation;
 using System.Diagnostics;
-namespace IntenetLocker
+using System.Net.NetworkInformation;
+using System.Windows.Forms;
+namespace InternetLocker
 {
     public partial class Form1 : Form
     {
-        //private const string InterfaceName = "wifi";
-        //private static string strCmdText = "netsh interface set interface \"" + InterfaceName + "\" ";
+
         private static NetworkInterface[] list = NetworkInterface.GetAllNetworkInterfaces();
 
         public Form1()
         {
             InitializeComponent();
-            
+
             for (int i = 0; i < list.Length; i++)
             {
                 interfacesList.Items.Add(list[i].Name);
             }
-            
+
 
         }
 
         private void enableBtn_Click(object sender, EventArgs e)
         {
-            
-            foreach(string adap in interfacesList.CheckedItems)
+
+            foreach (string adap in interfacesList.CheckedItems)
             {
                 Enable(adap);
             }
-            
+
         }
 
         private void disableBtn_Click(object sender, EventArgs e)
@@ -48,20 +41,60 @@ namespace IntenetLocker
             }
         }
 
-        static void Enable(string interfaceName)
+        private void enAllBtn_Click(object sender, EventArgs e)
         {
+            enableAll();
+        }
+
+        private void disAllBtn_Click(object sender, EventArgs e)
+        {
+            disableAll();
+        }
+
+        private void Enable(string interfaceName)
+        {
+
             ProcessStartInfo psi =
-                   new ProcessStartInfo("CMD.exe", "/C netsh interface set interface \""+interfaceName+"\" Enable");
+                   new ProcessStartInfo("CMD.exe", "/C netsh interface set interface \"" + interfaceName + "\" Enable");
             psi.Verb = "runas";
             psi.FileName = "cmd.exe";
-            psi.WindowStyle = ProcessWindowStyle.Hidden;
+            if (!cmd.Checked)
+            {
+                psi.WindowStyle = ProcessWindowStyle.Hidden;
+
+            }
             Process p = new Process();
             p.StartInfo = psi;
             p.Start();
+            if (!cmd.Checked)
+            {
+                p.WaitForExit();
+            }
+
+        }
+        private void Disable(string interfaceName)
+        {
+
+            ProcessStartInfo psi =
+                   new ProcessStartInfo("CMD.exe", "/C  netsh interface set interface \"" + interfaceName + "\" Disable");
+            psi.Verb = "runas";
+            psi.FileName = "cmd.exe";
+            {
+                psi.WindowStyle = ProcessWindowStyle.Hidden;
+
+            }
+            Process p = new Process();
+            p.StartInfo = psi;
+            p.Start();
+            if (!cmd.Checked)
+            {
+                p.WaitForExit();
+            }
+
 
         }
 
-        static void enableAll()
+        private void enableAll()
         {
             string com = "";
             foreach (NetworkInterface adap in list)
@@ -72,11 +105,19 @@ namespace IntenetLocker
                    new ProcessStartInfo("CMD.exe", "/K" + com);
             psi.Verb = "runas";
             psi.FileName = "cmd.exe";
-            psi.WindowStyle = ProcessWindowStyle.Hidden;
+            if (!cmd.Checked)
+            {
+                psi.WindowStyle = ProcessWindowStyle.Hidden;
+
+            }
             Process p = new Process();
             p.StartInfo = psi;
             p.Start();
-            //p.WaitForExit();
+            if (!cmd.Checked)
+            {
+                p.WaitForExit();
+            }
+
 
         }
 
@@ -98,27 +139,7 @@ namespace IntenetLocker
             //p.WaitForExit();
         }
 
-        static void Disable(string interfaceName)
-        {
 
-            ProcessStartInfo psi =
-                   new ProcessStartInfo("CMD.exe", "/C  netsh interface set interface \"" + interfaceName + "\" Disable");
-            psi.Verb = "runas";
-            psi.FileName = "cmd.exe";
-            psi.WindowStyle = ProcessWindowStyle.Hidden;
-            Process p = new Process();
-            p.StartInfo = psi;
-            p.Start();
-
-            //System.Diagnostics.Process process = new System.Diagnostics.Process();
-            //System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-            //startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            //startInfo.FileName = "cmd.exe";
-            //startInfo.Arguments = strCmdText + " Disable";
-            //startInfo.Verb = "runas";
-            //process.StartInfo = startInfo;
-            //process.Start();
-        }
 
         static void QueryInstanceFunc()
         {
@@ -135,14 +156,6 @@ namespace IntenetLocker
             Console.ReadLine();
         }
 
-        private void enAllBtn_Click(object sender, EventArgs e)
-        {
-            enableAll();
-        }
 
-        private void disAllBtn_Click(object sender, EventArgs e)
-        {
-            disableAll();
-        }
     }
 }

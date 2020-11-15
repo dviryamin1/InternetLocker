@@ -1,4 +1,4 @@
-﻿namespace IntenetLocker
+﻿namespace InternetLocker
 {
     partial class Form1
     {
@@ -33,7 +33,8 @@
             this.enAllBtn = new System.Windows.Forms.Button();
             this.disAllBtn = new System.Windows.Forms.Button();
             this.interfacesList = new System.Windows.Forms.CheckedListBox();
-            this.cmdWin = new System.Windows.Forms.CheckBox();
+            this.cmd = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // enableBtn
@@ -86,23 +87,33 @@
             this.interfacesList.Size = new System.Drawing.Size(224, 109);
             this.interfacesList.TabIndex = 4;
             // 
-            // cmdWin
+            // cmd
             // 
-            this.cmdWin.AutoSize = true;
-            this.cmdWin.Enabled = false;
-            this.cmdWin.Location = new System.Drawing.Point(299, 23);
-            this.cmdWin.Name = "cmdWin";
-            this.cmdWin.Size = new System.Drawing.Size(119, 17);
-            this.cmdWin.TabIndex = 5;
-            this.cmdWin.Text = "Show CMD window";
-            this.cmdWin.UseVisualStyleBackColor = true;
+            this.cmd.AutoSize = true;
+            this.cmd.Location = new System.Drawing.Point(350, 56);
+            this.cmd.Name = "cmd";
+            this.cmd.Size = new System.Drawing.Size(119, 17);
+            this.cmd.TabIndex = 6;
+            this.cmd.Text = "Show CMD window";
+            this.cmd.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(346, 110);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(80, 17);
+            this.checkBox1.TabIndex = 7;
+            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(565, 273);
-            this.Controls.Add(this.cmdWin);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.cmd);
             this.Controls.Add(this.interfacesList);
             this.Controls.Add(this.disAllBtn);
             this.Controls.Add(this.enAllBtn);
@@ -122,7 +133,8 @@
         private System.Windows.Forms.Button enAllBtn;
         private System.Windows.Forms.Button disAllBtn;
         private System.Windows.Forms.CheckedListBox interfacesList;
-        private System.Windows.Forms.CheckBox cmdWin;
+        private System.Windows.Forms.CheckBox cmd;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 
